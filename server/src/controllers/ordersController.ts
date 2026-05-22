@@ -11,7 +11,7 @@ export const getOrders = async (req: Request, res: Response) => {
     try {
         const query = { user: req.user._id };
 
-        const orders = await Order.find(query).populate("items.product", "name images").sort("-createdAt");
+        const orders = await Order.find(query).populate("items.product", "name images").sort("-createdAt").lean();
 
         res.json({
             success: true,
@@ -26,7 +26,7 @@ export const getOrders = async (req: Request, res: Response) => {
 // GET /api/orders/:id
 export const getOrder = async (req: Request, res: Response) => {
     try {
-        const order = await Order.findById(req.params.id).populate("items.product", "name images");
+        const order = await Order.findById(req.params.id).populate("items.product", "name images").lean();
 
         if (!order) {
             return res.status(404).json({ success: false, message: "Order not found" });
@@ -200,7 +200,8 @@ export const getAllOrders = async (req: Request, res: Response) => {
             .populate("items.product", "name")
             .sort("-createdAt")
             .skip((Number(page) - 1) * Number(limit))
-            .limit(Number(limit));
+            .limit(Number(limit))
+            .lean();
 
         res.json({
             success: true,

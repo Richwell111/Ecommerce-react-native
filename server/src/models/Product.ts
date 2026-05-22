@@ -19,7 +19,12 @@ const productSchema = new Schema<IProduct>(
     { timestamps: true }
 );
 
+
 productSchema.index({ name: "text", description: "text" });
+productSchema.index({ category: 1 });
+productSchema.index({ isActive: 1 });
+productSchema.index({ isFeatured: 1 });
+productSchema.index({ createdAt: -1 });
 
 const Product = mongoose.model<IProduct>("Product", productSchema);
 
