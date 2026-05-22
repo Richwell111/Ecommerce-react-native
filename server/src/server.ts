@@ -4,6 +4,7 @@ import cors from "cors";
 import { clerkMiddleware } from '@clerk/express'
 import connectDB from "./config/db.js";
 import { clerkWebhook } from "./controllers/webhooks.js";
+import makeAdmin from "./scripts/makeAdmin.js";
 
 dotenv.config({quiet:true});
 const PORT = process.env.PORT || 3000;
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
     res.send("Server is running...");
 });
 
+makeAdmin();
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
