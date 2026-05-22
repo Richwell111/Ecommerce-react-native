@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Dimensions, Image, ScrollView, Text, TouchableOpacity, View, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-// import CategoryItem from "@/components/CategoryItem";
+import CategoryItem from "@/components/CategoryItem";
 import Header from "@/components/Header";
 // import ProductCard from "@/components/ProductCard";
 import api from "@/constants/api";
@@ -68,6 +68,22 @@ const Home = () => {
                         ))}
                     </View>
                 </View>
+                  {/* Categories */}
+                <View className="mb-6">
+                    <View className="flex-row justify-between items-center mb-4">
+                        <Text className="text-xl font-bold text-primary">Categories</Text>
+                    </View>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                        {categories.map((cat: any) => (
+                            <CategoryItem
+                                key={cat.id}
+                                item={cat}
+                                isSelected={false}
+                                onPress={() => router.push({ pathname: "/shop" as any, params: { category: cat.id === 'all' ? '' : cat.name } })}
+                            />
+                        ))}
+                    </ScrollView>
+                    </View>
 
            </ScrollView>
      </SafeAreaView>
