@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View, ActivityIndicator, RefreshControl, Image, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants";
-import { dummyProducts } from "@/assets";
+import { dummyProducts } from "@/assets/assets";
 
 export default function AdminProducts() {
     const router = useRouter();

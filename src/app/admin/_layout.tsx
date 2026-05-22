@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { View, ActivityIndicator, TouchableOpacity, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants";
-import { dummyUser } from "@/assets";
+import { dummyUser } from "@/assets/assets";
 
 export default function AdminLayout() {
     const { user } = { user: dummyUser }

@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message';
 import { COLORS, CATEGORIES } from "@/constants";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { dummyProducts } from "@/assets";
+import { dummyProducts } from "@/assets/assets";
 
 export default function EditProduct() {
     const { id } = useLocalSearchParams();
