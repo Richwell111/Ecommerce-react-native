@@ -6,6 +6,14 @@ import connectDB from "./config/db.js";
 import { clerkWebhook } from "./controllers/webhooks.js";
 import makeAdmin from "./scripts/makeAdmin.js";
 import { seedProducts } from "./scripts/seedProducts.js";
+import ProductRouter from "./routes/productsRoutes.js";
+import CartRouter from "./routes/cartRoutes.js";
+import OrderRouter from "./routes/ordersRoutes.js";
+import AddressRouter from "./routes/addressRoutes.js";
+import WishlistRouter from "./routes/wishlistRoutes.js";
+import AdminRouter from "./routes/adminRoutes.js";
+import { handleStripeWebhook } from "./controllers/paymentController.js";
+import paymentRouter from "./routes/paymentRoute.js";
 
 dotenv.config({quiet:true});
 const PORT = process.env.PORT || 3000;
