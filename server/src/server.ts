@@ -12,6 +12,9 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
+// Clerk webhook endpoint (must come before clerkMiddleware)
+app.post("/api/clerk", express.raw({ type: "application/json" }), clerkWebhook);
+
 app.use(cors());
 app.use(express.json());
 app.use(clerkMiddleware())
