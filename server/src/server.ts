@@ -5,6 +5,7 @@ import { clerkMiddleware } from '@clerk/express'
 import connectDB from "./config/db.js";
 import { clerkWebhook } from "./controllers/webhooks.js";
 import makeAdmin from "./scripts/makeAdmin.js";
+import { seedProducts } from "./scripts/seedProducts.js";
 
 dotenv.config({quiet:true});
 const PORT = process.env.PORT || 3000;
@@ -25,6 +26,8 @@ app.get("/", (req, res) => {
 });
 
 makeAdmin();
+// Seed products if no products are present
+await seedProducts (process.env.MONGODB_URI as string);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
