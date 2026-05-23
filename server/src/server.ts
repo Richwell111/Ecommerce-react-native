@@ -32,7 +32,12 @@ app.use(clerkMiddleware())
 app.get("/", (req, res) => {
     res.send("Server is running...");
 });
-
+app.use("/api/products", ProductRouter);
+app.use("/api/cart", CartRouter);
+app.use("/api/orders", OrderRouter);
+app.use("/api/addresses", AddressRouter);
+app.use("/api/wishlist", WishlistRouter);
+app.use("/api/admin", AdminRouter);
 makeAdmin();
 // Seed products if no products are present
 await seedProducts (process.env.MONGODB_URI as string);
