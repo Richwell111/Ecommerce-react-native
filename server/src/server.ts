@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Connect to MongoDB
-connectDB();
+await connectDB();
 
 // Clerk webhook endpoint (must come before clerkMiddleware)
 app.post("/api/clerk", express.raw({ type: "application/json" }), clerkWebhook);
@@ -38,9 +38,25 @@ app.use("/api/orders", OrderRouter);
 app.use("/api/addresses", AddressRouter);
 app.use("/api/wishlist", WishlistRouter);
 app.use("/api/admin", AdminRouter);
-makeAdmin();
-// Seed products if no products are present
-await seedProducts (process.env.MONGODB_URI as string);
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Initialization logic (Seeding and Admin setup)
+const init = async () => {
+    try {
+        await makeAdmin();
+        const mongoUri = process.env.MONGODB_URI;
+        if (mongoUri) {
+            await seedProducts(mongoUri);
+        }
+    } catch (error) {
+        console.error("Initialization Error:", error);
+    }
+};
+
+init();
+
+if (process.env.NODE_ENV !== "production") {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+}
+
+export default app;
