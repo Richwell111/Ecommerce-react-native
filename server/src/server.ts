@@ -21,6 +21,8 @@ const app = express();
 
 // Connect to MongoDB
 await connectDB();
+// Stripe Webhook
+process.env.STRIPE_SECRET_KEY && app.post("/api/stripe", express.raw({ type: "application/json" }), handleStripeWebhook);
 
 // Clerk webhook endpoint (must come before clerkMiddleware)
 app.post("/api/clerk", express.raw({ type: "application/json" }), clerkWebhook);
@@ -38,6 +40,7 @@ app.use("/api/orders", OrderRouter);
 app.use("/api/addresses", AddressRouter);
 app.use("/api/wishlist", WishlistRouter);
 app.use("/api/admin", AdminRouter);
+process.env.STRIPE_SECRET_KEY && app.use("/api/payments", paymentRouter);
 // Initialization logic (Seeding and Admin setup)
 const init = async () => {
     try {
@@ -59,4 +62,4 @@ if (process.env.NODE_ENV !== "production") {
     });
 }
 
-export default app;
+export default app;
