@@ -49,6 +49,7 @@
     "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
+    "@clerk/types": "^4.101.24",
     "@types/react": "~19.2.2",
     "typescript": "~5.9.2"
   },
