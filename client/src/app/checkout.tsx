@@ -8,7 +8,7 @@ import { COLORS } from "@/constants";
 import api from "@/constants/api";
 import { Address } from "@/constants/types";
 import { useCart } from "@/context/CartContext";
-import { useAuth } from "@clerk/clerk-expo";
+import { useAuth } from "@clerk/expo";
 import Toast from 'react-native-toast-message';
 import { WebView } from 'react-native-webview';
 

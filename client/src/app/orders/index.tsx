@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import api from "@/constants/api";
 import { COLORS, getStatusColor } from "@/constants";
 import type { Order } from "@/constants/types";
-import { useAuth } from "@clerk/clerk-expo";
+import { useAuth } from "@clerk/expo";
 import { formatDate } from "@/assets/assets";
 
 export default function Orders() {

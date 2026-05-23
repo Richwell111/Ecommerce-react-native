@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import { COLORS } from "@/constants";
 import api from "@/constants/api";
 import type { Address } from "@/constants/types";
-import { useAuth } from "@clerk/clerk-expo";
+import { useAuth } from "@clerk/expo";
 
 export default function Addresses() {
     const [addresses, setAddresses] = useState<Address[]>([]);
