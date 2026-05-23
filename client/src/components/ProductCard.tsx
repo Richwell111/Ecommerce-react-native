@@ -12,7 +12,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     const isLiked = isInWishlist(product._id);
 
     return (
-        <Link href={`/product/${product._id}`} asChild>
+        <Link href={{ pathname: "/product/[id]", params: { id: product._id } } as any} asChild>
             <TouchableOpacity className="w-[48%] mb-4 bg-white rounded-lg overflow-hidden">
                 <View className="relative h-56 w-full bg-gray-100">
                     <Image source={{ uri: product.images[0] }} className="w-full h-full" resizeMode="cover" />
