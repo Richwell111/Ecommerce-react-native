@@ -3,7 +3,11 @@ import Order from "../models/Order.js";
 import Cart from "../models/Cart.js";
 import type { Request, Response } from "express";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY && process.env.STRIPE_SECRET_KEY.startsWith('sk_') 
+    ? process.env.STRIPE_SECRET_KEY 
+    : "sk_test_dummy_key_if_not_set";
+
+const stripe = new Stripe(stripeSecretKey);
 
 // Create Checkout Session
 // POST /api/payment/checkout
