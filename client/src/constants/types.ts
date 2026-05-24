@@ -120,4 +120,5 @@ export type WishlistContextType = {
     isInWishlist: (productId: string) => boolean;
     loading: boolean;
     error: string | null;
+    status: 'idle' | 'loading' | 'success' | 'error';
 };
