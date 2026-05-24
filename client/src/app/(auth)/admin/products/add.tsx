@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { ScrollView, Text, TextInput, TouchableOpacity, View, Switch, Image, ActivityIndicator, Modal, FlatList, TouchableWithoutFeedback, Platform, } from "react-native";
 import Toast from 'react-native-toast-message';
-import { useAuth } from "@clerk/clerk-expo";
+import { useAuth } from "@clerk/expo";
 import api from "@/constants/api";
 import { COLORS } from "@/constants";
 import { Ionicons } from "@expo/vector-icons";

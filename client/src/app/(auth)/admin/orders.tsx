@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View, ActivityIndicator, RefreshControl, Alert, Modal, TouchableWithoutFeedback, FlatList } from "react-native";
-import { useAuth } from "@clerk/clerk-expo";
+import { useAuth } from "@clerk/expo";
 import api from "@/constants/api";
 import { COLORS, getStatusColor } from "@/constants";
 import { Ionicons } from "@expo/vector-icons";

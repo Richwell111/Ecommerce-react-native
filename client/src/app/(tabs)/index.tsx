@@ -17,6 +17,7 @@ export default function Home() {
     const [activeBannerIndex, setActiveBannerIndex] = useState(0);
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     const categories = [{ id: "all", name: "All", icon: "grid" }, ...CATEGORIES];
 
@@ -26,14 +27,31 @@ export default function Home() {
 
     const fetchProducts = async () => {
         try {
+            setError(null);
             const { data } = await api.get("/products");
             setProducts(data.data);
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error fetching products:", error);
+            setError("Failed to load products. Please check your connection.");
         } finally {
             setLoading(false);
         }
     };
+
+    if (error && products.length === 0) {
+        return (
+            <SafeAreaView className="flex-1 bg-background" edges={['top']}>
+                <Header title="Newever" showMenu showCart showLogo />
+                <View className="flex-1 items-center justify-center px-8">
+                    <Text className="text-primary font-bold text-lg text-center mb-2">Oops! Something went wrong</Text>
+                    <Text className="text-secondary text-center mb-6">{error}</Text>
+                    <TouchableOpacity onPress={fetchProducts} className="bg-primary px-8 py-3 rounded-full">
+                        <Text className="text-white font-bold">Try Again</Text>
+                    </TouchableOpacity>
+                </View>
+            </SafeAreaView>
+        );
+    }
 
     return (
         <SafeAreaView className="flex-1 bg-background" edges={['top']}>

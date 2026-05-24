@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View, ActivityIndicator, RefreshControl } from "react-native";
-import { useAuth } from "@clerk/clerk-expo";
+import { useAuth, useUser } from "@clerk/expo";
 import api from "@/constants/api";
 import { COLORS, getStatusColor } from "@/constants";
 

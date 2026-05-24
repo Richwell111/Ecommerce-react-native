@@ -9,16 +9,31 @@ const WishlistContext = createContext<WishlistContextType | undefined>(undefined
 export function WishlistProvider({ children }: { children: ReactNode }) {
     const [wishlist, setWishlist] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const { isSignedIn, getToken } = useAuth();
 
     const fetchWishlist = async () => {
         setLoading(true);
+        setError(null);
         try {
             const token = await getToken();
             const { data } = await api.get("/wishlist", { headers: { Authorization: `Bearer ${token}` } });
             setWishlist(data.data);
-        } catch (error) {
-            console.error("Error fetching wishlist:", error);
+        } catch (err: any) {
+            console.error("Error fetching wishlist:", err);
+            
+            if (err.response?.status === 401) {
+                setError("Your session has expired. Please login again.");
+                setWishlist([]); // Clear if unauthorized
+            } else {
+                setError("Failed to load wishlist. Please try again later.");
+            }
+
+            Toast.show({
+                type: 'error',
+                text1: 'Wishlist Error',
+                text2: err.response?.data?.message || err.message || "Failed to load wishlist"
+            });
         } finally {
             setLoading(false);
         }
@@ -62,11 +77,12 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
             fetchWishlist();
         } else {
             setWishlist([]);
+            setError(null);
         }
     }, [isSignedIn]);
 
     return (
-        <WishlistContext.Provider value={{ wishlist, toggleWishlist, isInWishlist, loading }}>
+        <WishlistContext.Provider value={{ wishlist, toggleWishlist, isInWishlist, loading, error }}>
             {children}
         </WishlistContext.Provider>
     );

@@ -5,7 +5,7 @@ import { Image, ScrollView, Text, TouchableOpacity, View, Alert, Platform } from
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@/components/Header";
 import { COLORS, PROFILE_MENU } from "@/constants";
-import { useClerk } from "@clerk/clerk-expo";
+import { useClerk } from "@clerk/expo";
 
 export default function Profile() {
     const router = useRouter();

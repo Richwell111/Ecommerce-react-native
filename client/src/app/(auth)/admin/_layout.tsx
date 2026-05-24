@@ -1,5 +1,5 @@
 import { Tabs, useRouter } from "expo-router";
-import { useUser } from "@clerk/clerk-expo";
+import { useUser } from "@clerk/expo";
 import { useEffect } from "react";
 import { View, ActivityIndicator, TouchableOpacity, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
